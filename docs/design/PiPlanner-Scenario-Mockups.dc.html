@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300..500,0..1,0&display=block">
+<style>body{margin:0;background:#DDE3EB;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,sans-serif;color:#101010;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#00B9F1}a:hover{color:#002E6E}</style>
+</helmet>
+<div style="padding:56px 64px 120px;display:flex;flex-direction:column;gap:80px;width:max-content;min-width:100%">
+<div style="display:flex;flex-direction:column;gap:12px;max-width:1000px">
+<div style="font-size:13px;font-weight:700;letter-spacing:1px;color:#002E6E">PIPLANNER · SCENARIO MOCKUPS</div>
+<div style="font-size:44px;font-weight:700;letter-spacing:-0.6px">Every scenario, in the app's UI</div>
+<div style="font-size:17px;color:#4A5466;line-height:1.5">Each journey from USER_FLOW.md as a row of iPhone screens, using the prototype's tokens and components. Screen ids match SCREEN_FLOW.md; letters mark states and branches. Numbers are the demo profile.</div>
+<div style="display:flex;gap:28px;flex-wrap:wrap;margin-top:8px;font-size:14px;color:#4A5466">
+<span style="display:flex;align-items:center;gap:8px"><span style="width:36px;height:2px;background:#002E6E"></span>Action or decision</span>
+<span style="display:flex;align-items:center;gap:8px"><span style="width:26px;height:18px;background:#FFF3B0;border-radius:3px"></span>Rule</span>
+<span style="display:flex;align-items:center;gap:8px"><span style="width:26px;height:18px;border:2px dashed #002E6E;border-radius:6px"></span>Continues elsewhere</span>
+</div>
+</div>
+
+<sc-for list="{{ sections }}" as="sec" hint-placeholder-count="2">
+<section id="{{ sec.id }}" style="display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;gap:16px;border-bottom:2px solid #002E6E;padding-bottom:16px">
+<span style="font-size:15px;font-weight:700;background:#002E6E;color:#fff;padding:5px 10px;border-radius:6px">{{ sec.id }}</span>
+<span style="font-size:30px;font-weight:700;letter-spacing:-0.3px">{{ sec.title }}</span>
+<span style="font-size:16px;color:#6B7280;max-width:900px">{{ sec.desc }}</span>
+</div>
+<sc-for list="{{ sec.rows }}" as="row">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font-size:13px;font-weight:700;color:#6B7280;letter-spacing:.6px">{{ row.label }}</div>
+<div style="display:flex;align-items:flex-start">
+<sc-for list="{{ row.items }}" as="it">
+<sc-if value="{{ it.isFrame }}">
+<div style="display:flex;flex-direction:column;gap:12px;width:412px;flex:none">
+<div style="display:flex;align-items:baseline;gap:8px;min-height:24px"><span style="font-size:13px;font-weight:700;background:#002E6E;color:#fff;padding:3px 8px;border-radius:5px;flex:none">{{ it.id }}</span><span style="font-size:16px;font-weight:600">{{ it.name }}</span></div>
+<div style="width:412px;height:866px;border-radius:58px;background:#0B0B0C;padding:11px;box-shadow:0 24px 48px rgba(0,30,70,.16)">
+<div style="position:relative;width:100%;height:100%;border-radius:47px;overflow:hidden;background:{{ it.screenBg }};display:flex;flex-direction:column">
+<div style="height:50px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:6px 30px 0 34px;position:relative;background:{{ it.barBg }}">
+<div style="font-size:16px;font-weight:600">9:41</div>
+<div style="position:absolute;left:50%;top:11px;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#0B0B0C"></div>
+<div style="display:flex;gap:4px;align-items:center"><span style="font-family:'Material Symbols Outlined';font-size:18px;line-height:1">signal_cellular_alt</span><span style="font-family:'Material Symbols Outlined';font-size:18px;line-height:1">wifi</span><span style="font-family:'Material Symbols Outlined';font-size:20px;line-height:1">battery_full</span></div>
+</div>
+<div style="flex:{{ it.fill }};display:{{ it.fillDisp }};align-items:center;justify-content:center;color:#fff;font-size:15px;font-weight:600;opacity:.85">{{ it.under }}</div>
+<div style="flex:{{ it.cflex }};display:flex;flex-direction:column;gap:12px;background:{{ it.cbg }};border-radius:{{ it.cr }};padding:{{ it.cpad }};min-height:0;overflow:hidden">
+<sc-if value="{{ it.sheet }}"><div style="width:40px;height:5px;border-radius:3px;background:#DDE3EB;align-self:center;flex:none;margin-bottom:-2px"></div></sc-if>
+<sc-for list="{{ it.blocks }}" as="bk">
+<div style="display:flex;flex-direction:column;gap:{{ bk.gap }};background:{{ bk.bg }};box-shadow:{{ bk.sh }};padding:{{ bk.pad }};flex:{{ bk.flex }};margin:{{ bk.margin }};border-radius:{{ bk.radius }}">
+<sc-for list="{{ bk.els }}" as="e">
+<sc-if value="{{ e.hdr }}"><div style="display:flex;align-items:center;gap:10px;padding:6px 0 2px"><div style="width:40px;height:40px;border-radius:14px;background:#002E6E;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;flex:none">R</div><div style="flex:1;height:40px;border-radius:14px;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.04),0 0 0 1px rgba(0,46,110,.05);display:flex;align-items:center;gap:8px;padding:0 14px;color:#8A94A6;font-size:14px"><span style="font-family:'Material Symbols Outlined';font-size:20px;line-height:1;font-variation-settings:'wght' 400">search</span>Search</div><span style="width:40px;height:40px;border-radius:14px;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.04),0 0 0 1px rgba(0,46,110,.05);color:#002E6E;display:flex;align-items:center;justify-content:center;position:relative"><span style="font-family:'Material Symbols Outlined';font-size:22px;line-height:1;font-variation-settings:'wght' 400">notifications</span><span style="position:absolute;top:9px;right:10px;width:7px;height:7px;border-radius:50%;background:#00B9F1;border:1.5px solid #fff"></span></span></div></sc-if>
+<sc-if value="{{ e.gr }}"><div style="display:flex;align-items:center;justify-content:space-between"><div style="font-size:15px;font-weight:600;color:#fff">Good evening, Rahul</div><div style="display:flex;gap:8px"><span style="width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.12);color:#fff;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Outlined';font-size:20px;line-height:1;font-variation-settings:'wght' 400">bar_chart</span></span><span style="width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.12);color:#fff;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Outlined';font-size:20px;line-height:1;font-variation-settings:'wght' 400">settings</span></span></div></div></sc-if>
+<sc-if value="{{ e.sec }}"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:24px"><div style="font-size:17px;font-weight:700;letter-spacing:-0.2px">{{ e.a }}</div><span style="color:#00658F;font-size:14px;font-weight:600">{{ e.b2 }}</span></div></sc-if>
+<sc-if value="{{ e.H }}"><div style="font-size:30px;font-weight:700;letter-spacing:-0.6px;line-height:1.15;padding:8px 6px 2px">{{ e.a }}</div></sc-if>
+<sc-if value="{{ e.h }}"><div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;height:56px;margin:0 -2px"><div><sc-if value="{{ e.hasBack }}"><span style="width:40px;height:40px;border-radius:14px;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.04),0 0 0 1px rgba(0,46,110,.05);color:#002E6E;display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:20px;line-height:1;font-variation-settings:'wght' 400">arrow_back</span></span></sc-if></div><div style="font-size:17px;font-weight:650;letter-spacing:-0.2px;text-align:center;white-space:nowrap">{{ e.a }}</div><div style="display:flex;justify-content:flex-end"><sc-if value="{{ e.hasTag }}"><span style="font-size:12px;font-weight:700;color:{{ e.tagColor }};background:{{ e.tagBg }};padding:7px 10px;border-radius:10px;white-space:nowrap">{{ e.b2 }}</span></sc-if><sc-if value="{{ e.hasIcon }}"><span style="width:40px;height:40px;border-radius:14px;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.04),0 0 0 1px rgba(0,46,110,.05);color:#002E6E;display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:20px;line-height:1;font-variation-settings:'wght' 400">{{ e.c2 }}</span></span></sc-if></div></div></sc-if>
+<sc-if value="{{ e.st }}"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div style="font-size:20px;font-weight:700;letter-spacing:-0.3px;line-height:1.25">{{ e.a }}</div><sc-if value="{{ e.hasB }}"><span style="width:36px;height:36px;border-radius:12px;background:#F3F6FA;color:#4A5466;display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:20px;line-height:1;font-variation-settings:'wght' 400">close</span></span></sc-if></div></sc-if>
+<sc-if value="{{ e.ttl }}"><div style="font-size:18px;font-weight:700;letter-spacing:-0.2px;line-height:1.3;color:{{ e.col }}">{{ e.a }}</div></sc-if>
+<sc-if value="{{ e.t }}"><div style="font-size:14px;color:{{ e.tc }};line-height:1.45;padding:{{ e.pad }}">{{ e.a }}</div></sc-if>
+<sc-if value="{{ e.c }}"><div style="font-size:13px;color:#6B7280;text-align:{{ e.align }};line-height:1.4;padding:{{ e.pad }}">{{ e.a }}</div></sc-if>
+<sc-if value="{{ e.i }}"><div style="height:170px;border-radius:18px;background:{{ e.ibg }};display:flex;align-items:center;justify-content:center;font:500 11px ui-monospace,Menlo,monospace;color:{{ e.icol }};margin-bottom:8px">{{ e.a }}</div></sc-if>
+<sc-if value="{{ e.hero }}"><div style="display:flex;flex-direction:column;gap:8px;color:#fff"><div style="font-size:12px;font-weight:700;color:#7FD8F7;letter-spacing:1.2px">PIPLANNER</div><div style="font-size:30px;font-weight:700;line-height:1.15;letter-spacing:-0.6px">Every Rupee Has a Plan.</div><div style="font-size:15px;line-height:1.45;color:rgba(255,255,255,.85)">Every credit to savings gets a goal before it can be spent.</div><div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px">Powered by Grok</div></div></sc-if>
+<sc-if value="{{ e.b }}"><div style="height:56px;border-radius:18px;background:{{ e.bg }};color:#fff;font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;opacity:{{ e.op }};box-shadow:0 12px 24px -12px {{ e.bs }},inset 0 1px 0 rgba(255,255,255,.16)"><sc-if value="{{ e.lock }}"><span style="font-family:'Material Symbols Outlined';font-size:20px;line-height:1;font-variation-settings:'wght' 400">lock</span></sc-if>{{ e.a }}</div></sc-if>
+<sc-if value="{{ e.o }}"><div style="height:56px;border-radius:18px;background:{{ e.obg }};color:{{ e.col }};font-size:17px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ e.a }}</div></sc-if>
+<sc-if value="{{ e.l }}"><div style="color:{{ e.lcol }};font-size:15px;font-weight:600;padding:{{ e.pad }};text-align:{{ e.align }};min-height:{{ e.lmh }};display:flex;align-items:center;justify-content:{{ e.jc }}">{{ e.a }}</div></sc-if>
+<sc-if value="{{ e.k }}"><div style="display:flex;align-items:center;gap:12px;background:{{ e.kbg }};border-radius:20px;padding:{{ e.kp }}"><span style="width:48px;height:48px;border-radius:15px;background:{{ e.tbg }};color:{{ e.tcol }};display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:24px;line-height:1;font-variation-settings:'wght' 400">{{ e.icon }}</span></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:{{ e.kfs }};font-weight:{{ e.kfw }};color:{{ e.kcol }};letter-spacing:{{ e.kls }}">{{ e.a }}</span><span style="font-size:13px;color:#6B7280;line-height:1.35">{{ e.b2 }}</span></div><sc-if value="{{ e.hasTg }}"><span style="width:48px;height:30px;border-radius:10px;background:{{ e.tgBg }};display:flex;justify-content:{{ e.tgJ }};padding:3px;flex:none"><span style="width:24px;height:24px;border-radius:8px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.18)"></span></span></sc-if><sc-if value="{{ e.chev }}"><span style="font-family:'Material Symbols Outlined';font-size:22px;line-height:1;font-variation-settings:'wght' 400;color:#9AA4B2">chevron_right</span></sc-if></div></sc-if>
+<sc-if value="{{ e.ck }}"><div style="display:flex;gap:10px;font-size:15px;line-height:1.4;align-items:flex-start"><span style="width:22px;height:22px;border-radius:7px;background:#E3F3EC;color:#0A8F5B;display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:16px;line-height:1;font-variation-settings:'wght' 400">check</span></span><span>{{ e.a }}</span></div></sc-if>
+<sc-if value="{{ e.r }}"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:15px;min-height:46px;border-bottom:1px solid #EEF1F5"><span style="color:{{ e.lc }}">{{ e.a }}</span><span style="font-weight:600;text-align:right;font-variant-numeric:tabular-nums;color:{{ e.col }}">{{ e.b2 }}</span></div></sc-if>
+<sc-if value="{{ e.big }}"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding-top:6px"><span style="font-size:15px;color:#6B7280">{{ e.b2 }}</span><span style="font-size:34px;font-weight:700;letter-spacing:-0.8px;font-variant-numeric:tabular-nums;color:{{ e.col }}">{{ e.a }}</span></div></sc-if>
+<sc-if value="{{ e.bal }}"><div style="font-size:40px;font-weight:700;letter-spacing:-1px;line-height:1.1;font-variant-numeric:tabular-nums;color:{{ e.col }};text-align:{{ e.align }}">{{ e.a }}</div></sc-if>
+<sc-if value="{{ e.tag }}"><span style="align-self:{{ e.self }};display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#4A5466;background:#EEF1F6;padding:6px 12px;border-radius:10px"><span style="font-family:'Material Symbols Outlined';font-size:16px;line-height:1;font-variation-settings:'wght' 400">lock</span>{{ e.a }}</span></sc-if>
+<sc-if value="{{ e.ok }}"><div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:16px 0"><span style="width:64px;height:64px;border-radius:20px;background:#E3F3EC;color:#0A8F5B;display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:32px;line-height:1;font-variation-settings:'wght' 400">check</span></span><div style="font-size:16px;font-weight:600;margin-top:6px">{{ e.a }}</div><div style="font-size:42px;font-weight:700;letter-spacing:-1px">{{ e.b2 }}</div><div style="font-size:14px;color:#6B7280">{{ e.c2 }}</div></div></sc-if>
+<sc-if value="{{ e.dots }}"><div style="display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center"><span style="width:48px;height:48px;border-radius:15px;background:#EAF1FB;color:#002E6E;display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:24px;line-height:1;font-variation-settings:'wght' 400">account_balance</span></span><div style="font-size:17px;font-weight:600;margin-top:8px">HDFC Bank ••4821</div><div style="font-size:14px;color:#6B7280">No money is debited.</div><div style="display:flex;gap:14px;margin:18px 0 6px"><span style="width:14px;height:14px;border-radius:5px;border:1.5px solid #002E6E;background:#002E6E"></span><span style="width:14px;height:14px;border-radius:5px;border:1.5px solid #002E6E;background:#002E6E"></span><span style="width:14px;height:14px;border-radius:5px;border:1.5px solid #002E6E;background:#002E6E"></span><span style="width:14px;height:14px;border-radius:5px;border:1.5px solid #002E6E;background:{{ e.d4 }}"></span><span style="width:14px;height:14px;border-radius:5px;border:1.5px solid #002E6E;background:{{ e.d4 }}"></span><span style="width:14px;height:14px;border-radius:5px;border:1.5px solid #002E6E;background:{{ e.d4 }}"></span></div></div></sc-if>
+<sc-if value="{{ e.pad2 }}"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"><sc-for list="{{ e.keys }}" as="kk"><div style="height:54px;border-radius:16px;background:{{ kk.bg }};font-size:26px;font-weight:500;display:flex;align-items:center;justify-content:center"><span style="font-family:{{ kk.font }};font-size:{{ kk.size }};line-height:1">{{ kk.l }}</span></div></sc-for></div></sc-if>
+<sc-if value="{{ e.w }}"><div style="display:flex;gap:10px;align-items:flex-start;background:#FBF3E4;color:#7A4A00;border-radius:16px;padding:12px 14px;font-size:14px;line-height:1.45"><span style="font-family:'Material Symbols Outlined';font-size:20px;line-height:1;font-variation-settings:'wght' 400;flex:none">info</span><span>{{ e.a }}</span></div></sc-if>
+<sc-if value="{{ e.er }}"><div style="display:flex;gap:8px;align-items:center;justify-content:{{ e.jc }};font-size:14px;color:#C62828;line-height:1.4;padding:{{ e.pad }}"><span style="font-family:'Material Symbols Outlined';font-size:18px;line-height:1;font-variation-settings:'wght' 400;flex:none">error</span><span>{{ e.a }}</span></div></sc-if>
+<sc-if value="{{ e.tiles }}"><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px"><sc-for list="{{ e.tl }}" as="tt"><div style="display:flex;flex-direction:column;align-items:center;gap:8px;opacity:{{ tt.op }}"><span style="width:50px;height:50px;border-radius:16px;background:rgba(255,255,255,.13);color:#fff;display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:25px;line-height:1;font-variation-settings:'wght' 400">{{ tt.icon }}</span></span><span style="font-size:12px;text-align:center;line-height:1.25;color:#fff">{{ tt.x }}</span></div></sc-for></div></sc-if>
+<sc-if value="{{ e.g }}"><div style="padding:14px 0;border-bottom:1px solid #EEF1F5;display:flex;flex-direction:column;gap:10px"><div style="display:flex;align-items:center;gap:12px"><span style="width:44px;height:44px;border-radius:14px;background:#EAF1FB;color:#002E6E;display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:22px;line-height:1;font-variation-settings:'wght' 400">{{ e.icon }}</span></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600">{{ e.a }}</span><span style="font-size:13px;color:#6B7280;font-variant-numeric:tabular-nums">{{ e.b2 }}</span></div><span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;background:{{ e.chipBg }};color:{{ e.chipCol }};white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:currentColor"></span>{{ e.chip }}</span></div><div style="height:8px;border-radius:999px;background:#EDF1F6;overflow:hidden"><div style="height:100%;border-radius:999px;background:linear-gradient(90deg,#00B9F1,#0096D6);width:{{ e.prog }}"></div></div><div style="display:flex;justify-content:space-between;font-size:13px;color:#6B7280;font-variant-numeric:tabular-nums"><span>{{ e.needs }}</span><span style="font-weight:600;color:#2B3443">{{ e.share }}</span></div><sc-if value="{{ e.hasNote }}"><div style="display:flex;gap:8px;align-items:center;background:#E3F4FD;border-radius:12px;padding:8px 10px;font-size:13px;color:#00527A"><span style="font-family:'Material Symbols Outlined';font-size:16px;line-height:1;font-variation-settings:'wght' 400">schedule</span>Change saved. Applies at the next credit.</div></sc-if></div></sc-if>
+<sc-if value="{{ e.ban }}"><div style="background:#E3F4FD;border-radius:24px;padding:14px 14px 14px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 0 0 1px #BFE7F8"><span style="width:40px;height:40px;border-radius:13px;background:#fff;color:#00658F;display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:20px;line-height:1;font-variation-settings:'wght' 400">south</span></span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:700;color:#002E6E">New credit found</span><span style="font-size:14px;color:#2B3443">{{ e.a }}</span></div><span style="height:40px;padding:0 14px;border-radius:12px;background:#002E6E;color:#fff;font-size:14px;font-weight:600;display:flex;align-items:center">Assign now</span></div></sc-if>
+<sc-if value="{{ e.tabs }}"><div style="background:#fff;box-shadow:0 -1px 0 rgba(0,46,110,.06);display:grid;grid-template-columns:repeat(3,1fr);padding:8px 16px 28px"><sc-for list="{{ e.tb }}" as="tb"><div style="display:flex;flex-direction:column;align-items:center;gap:4px;color:{{ tb.col }}"><span style="width:56px;height:32px;border-radius:12px;background:{{ tb.pill }};display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Outlined';font-size:22px;line-height:1;font-variation-settings:'wght' 400">{{ tb.icon }}</span></span><span style="font-size:11px;font-weight:600">{{ tb.l }}</span></div></sc-for></div></sc-if>
+<sc-if value="{{ e.chips }}"><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ e.items }}" as="x"><span style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:14px;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.04),0 0 0 1px rgba(0,46,110,.05);font-size:14px;line-height:1.35"><span style="font-family:'Material Symbols Outlined';font-size:18px;line-height:1;font-variation-settings:'wght' 400;color:#00658F;flex:none">auto_awesome</span>{{ x }}</span></sc-for></div></sc-if>
+<sc-if value="{{ e.inp }}"><div style="display:flex;gap:8px;align-items:center;background:#fff;border-radius:18px;padding:6px 6px 6px 16px;box-shadow:0 1px 2px rgba(16,24,40,.04),0 0 0 1px rgba(0,46,110,.05);opacity:{{ e.op }}"><span style="flex:1;font-size:15px;color:#A3ACB9">{{ e.a }}</span><span style="width:40px;height:40px;border-radius:13px;background:#002E6E;color:#fff;display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:20px;line-height:1;font-variation-settings:'wght' 400">arrow_upward</span></span></div></sc-if>
+<sc-if value="{{ e.u }}"><div style="align-self:flex-end;max-width:80%;background:#002E6E;color:#fff;padding:11px 15px;border-radius:20px 20px 6px 20px;font-size:15px;line-height:1.4">{{ e.a }}</div></sc-if>
+<sc-if value="{{ e.gk }}"><div style="align-self:flex-start;max-width:86%;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.04),0 0 0 1px rgba(0,46,110,.05);padding:11px 15px;border-radius:20px 20px 20px 6px;font-size:15px;line-height:1.45">{{ e.a }}</div></sc-if>
+<sc-if value="{{ e.gl }}"><div style="background:#E3F4FD;border-radius:24px;padding:14px 16px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:10px;align-items:flex-start"><span style="width:32px;height:32px;border-radius:10px;background:#fff;color:#00658F;display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:16px;line-height:1;font-variation-settings:'wght' 400">auto_awesome</span></span><span style="flex:1;font-size:15px;line-height:1.5">{{ e.a }}</span></div><span style="font-size:11px;color:#5B7287;align-self:flex-end">Powered by Grok</span></div></sc-if>
+<sc-if value="{{ e.pr }}"><div style="background:#fff;border-radius:24px;padding:16px;display:flex;flex-direction:column;gap:6px;box-shadow:0 0 0 1.5px #BFE7F8,0 8px 24px -12px rgba(0,120,170,.35)"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="width:28px;height:28px;border-radius:9px;background:#E3F4FD;color:#00658F;display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:14px;line-height:1;font-variation-settings:'wght' 400">auto_awesome</span></span><span style="font-size:15px;font-weight:700;color:#002E6E">Grok's proposal</span></div><span style="font-size:15px;font-weight:700">{{ e.a }}</span><sc-for list="{{ e.lines }}" as="x"><span style="font-size:15px;line-height:1.4;font-variant-numeric:tabular-nums">{{ x }}</span></sc-for><sc-if value="{{ e.hasBtns }}"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px"><span style="height:46px;border-radius:14px;background:#EAF1FB;color:#002E6E;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center">Edit</span><span style="height:46px;border-radius:14px;background:#002E6E;color:#fff;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center">Confirm</span></div></sc-if><div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:#6B7280"><span>Checked by PiPlanner. Estimate.</span><span>Powered by Grok</span></div></div></sc-if>
+<sc-if value="{{ e.p }}"><div style="display:flex;align-items:center;gap:12px;min-height:64px;border-bottom:1px solid #EEF1F5"><span style="width:40px;height:40px;border-radius:13px;background:{{ e.tbg }};color:{{ e.tcol }};display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:20px;line-height:1;font-variation-settings:'wght' 400">{{ e.icon }}</span></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:600">{{ e.a }}</span><span style="font-size:13px;font-weight:600;color:{{ e.subCol }};font-variant-numeric:tabular-nums">{{ e.b2 }}</span></div><sc-if value="{{ e.field }}"><span style="display:flex;align-items:center;justify-content:flex-end;gap:2px;background:#F3F6FA;border-radius:12px;height:44px;padding:0 12px;width:92px;flex:none;font-size:17px;font-weight:650">{{ e.pct }}<span style="font-size:15px;color:#6B7280;font-weight:400">%</span></span></sc-if><sc-if value="{{ e.fixed }}"><span style="font-size:16px;font-weight:700;color:{{ e.fcol }}">{{ e.c2 }}</span></sc-if></div></sc-if>
+<sc-if value="{{ e.tot }}"><div style="font-size:15px;font-weight:700;color:{{ e.col }}">{{ e.a }}</div></sc-if>
+<sc-if value="{{ e.tg }}"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#F7F9FC;border-radius:14px;padding:10px 12px"><span style="font-size:15px;font-weight:600">{{ e.a }}</span><span style="width:48px;height:30px;border-radius:10px;background:{{ e.tgBg }};display:flex;justify-content:{{ e.tgJ }};padding:3px;flex:none"><span style="width:24px;height:24px;border-radius:8px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.18)"></span></span></div></sc-if>
+<sc-if value="{{ e.step }}"><div style="display:flex;align-items:center;justify-content:center;gap:20px;padding:4px 0"><span style="width:52px;height:52px;border-radius:16px;background:#EAF1FB;color:#002E6E;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Outlined';font-size:22px;line-height:1;font-variation-settings:'wght' 400">remove</span></span><span style="font-size:46px;font-weight:700;letter-spacing:-1px;min-width:120px;text-align:center">{{ e.a }}</span><span style="width:52px;height:52px;border-radius:16px;background:#EAF1FB;color:#002E6E;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Outlined';font-size:22px;line-height:1;font-variation-settings:'wght' 400">add</span></span></div></sc-if>
+<sc-if value="{{ e.amt }}"><div style="display:flex;align-items:baseline;justify-content:center;gap:4px;padding:18px 0 8px"><span style="font-size:30px;font-weight:600;color:#8A94A6">₹</span><span style="font-size:48px;font-weight:700;letter-spacing:-1px;font-variant-numeric:tabular-nums">{{ e.a }}</span></div></sc-if>
+<sc-if value="{{ e.bar }}"><div style="height:8px;border-radius:999px;background:#EDF1F6;overflow:hidden"><div style="width:{{ e.a }};height:100%;border-radius:999px;background:linear-gradient(90deg,#00B9F1,#0096D6)"></div></div></sc-if>
+<sc-if value="{{ e.row3 }}"><div style="display:grid;grid-template-columns:{{ e.cols }};gap:8px"><sc-for list="{{ e.btns }}" as="x"><span style="height:56px;border-radius:18px;background:{{ x.bg }};color:{{ x.col }};font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;opacity:{{ x.op }};white-space:nowrap;box-shadow:{{ x.sh }}">{{ x.l }}</span></sc-for></div></sc-if>
+<sc-if value="{{ e.toast }}"><div style="align-self:center;background:#0F1A2B;color:#fff;font-size:14px;padding:12px 16px;border-radius:14px;margin-top:auto;display:flex;gap:8px;align-items:center;box-shadow:0 12px 28px -8px rgba(0,0,0,.35)"><span style="font-family:'Material Symbols Outlined';font-size:18px;line-height:1;font-variation-settings:'wght' 400;color:#7FD8F7">info</span>{{ e.a }}</div></sc-if>
+<sc-if value="{{ e.hrow }}"><div style="display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #EEF1F5;align-items:flex-start"><span style="width:40px;height:40px;border-radius:13px;background:{{ e.ib }};color:{{ e.ic }};display:flex;align-items:center;justify-content:center;flex:none"><span style="font-family:'Material Symbols Outlined';font-size:20px;line-height:1;font-variation-settings:'wght' 400">{{ e.icon }}</span></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between;gap:8px"><span style="font-size:15px;font-weight:600">{{ e.a }}</span><span style="font-size:13px;color:#6B7280;white-space:nowrap">{{ e.date }}</span></div><span style="font-size:13px;color:#6B7280;line-height:1.4;font-variant-numeric:tabular-nums">{{ e.b2 }}</span><sc-if value="{{ e.open }}"><span style="align-self:flex-start;margin-top:6px;font-size:12px;font-weight:700;color:#002E6E;background:#BFEBFB;padding:6px 10px;border-radius:9px">Assign now</span></sc-if></div><sc-if value="{{ e.locked }}"><span style="font-family:'Material Symbols Outlined';font-size:16px;line-height:1;font-variation-settings:'wght' 400;color:#9AA4B2;margin-top:2px">lock</span></sc-if></div></sc-if>
+<sc-if value="{{ e.x }}"><div style="background:#EEF1F6;border-radius:24px;padding:16px 18px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;gap:8px;color:#6B7A8C"><span style="font-family:'Material Symbols Outlined';font-size:18px;line-height:1;font-variation-settings:'wght' 400">lock</span><span style="font-size:14px;font-weight:600">{{ e.a }}</span></div><sc-for list="{{ e.lrows }}" as="x"><div style="display:flex;justify-content:space-between;font-size:15px;color:#7A8698;padding-left:26px;font-variant-numeric:tabular-nums"><span>{{ x.n }}</span><span>{{ x.v }}</span></div></sc-for></div></sc-if>
+<sc-if value="{{ e.sp }}"><div style="flex:1"></div></sc-if>
+</sc-for>
+</div>
+</sc-for>
+</div>
+<div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#101010"></div>
+</div>
+</div>
+<sc-if value="{{ it.hasNote }}"><div style="background:#FFF3B0;padding:12px 14px;font-size:14px;line-height:1.45;border-radius:4px;color:#3A3A2A">{{ it.note }}</div></sc-if>
+</div>
+</sc-if>
+<sc-if value="{{ it.isArrow }}">
+<div style="width:132px;flex:none;display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:440px 12px 0">
+<div style="font-size:13px;font-weight:700;color:#002E6E;text-align:center;line-height:1.35">{{ it.label }}</div>
+<div style="display:flex;align-items:center"><div style="flex:1;height:2px;background:#002E6E"></div><div style="width:0;height:0;border-left:10px solid #002E6E;border-top:7px solid transparent;border-bottom:7px solid transparent"></div></div>
+</div>
+</sc-if>
+<sc-if value="{{ it.isRef }}">
+<div style="width:200px;flex:none;margin-top:410px;border:2px dashed #002E6E;border-radius:14px;padding:16px;font-size:15px;font-weight:600;color:#002E6E;text-align:center;line-height:1.4;background:#fff">{{ it.label }}</div>
+</sc-if>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</section>
+</sc-for>
+
+<section id="edge" style="display:flex;flex-direction:column;gap:20px;max-width:1300px">
+<div style="display:flex;align-items:baseline;gap:16px;border-bottom:2px solid #002E6E;padding-bottom:16px"><span style="font-size:15px;font-weight:700;background:#002E6E;color:#fff;padding:5px 10px;border-radius:6px">EDGE</span><span style="font-size:30px;font-weight:700">Edge rules, mapped to screens</span></div>
+<div style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) 160px;background:#fff;border-radius:20px;overflow:hidden">
+<div style="font-size:13px;font-weight:700;color:#6B7280;padding:14px 18px;background:#EEF1F6">Situation</div><div style="font-size:13px;font-weight:700;color:#6B7280;padding:14px 18px;background:#EEF1F6">What happens</div><div style="font-size:13px;font-weight:700;color:#6B7280;padding:14px 18px;background:#EEF1F6">Screens</div>
+<sc-for list="{{ edges }}" as="r" hint-placeholder-count="10">
+<div style="font-size:15px;padding:12px 18px;border-top:1px solid #E3E7ED;font-weight:600">{{ r.a }}</div><div style="font-size:15px;padding:12px 18px;border-top:1px solid #E3E7ED;color:#4A5466">{{ r.b }}</div><div style="font-size:14px;padding:12px 18px;border-top:1px solid #E3E7ED;color:#002E6E;font-weight:600">{{ r.c }}</div>
+</sc-for>
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const ICON={car:'directions_car',emergency:'medical_services',vacation:'flight',home:'home'};
+const gi=n=>{for(const k in ICON)if(n.toLowerCase().includes(k))return ICON[k];return 'savings';};
+const TILEMAP={'Sync':'sync','Update balance':'sync','New goal':'add','Transfer':'swap_horiz','History':'receipt_long'};
+const num=s=>Number(String(s).replace(/[^0-9]/g,''))||0;
+const MAP={boff:'b',bd:'b',bl:'b',terr:'tot',tilesoff:'tiles',in:'inp',inoff:'inp',bigg:'big',bigw:'big',balg:'bal',balw:'bal',od:'o',pad:'pad2'};
+const KEYS=['1','2','3','4','5','6','7','8','9','','0','⌫'].map(l=>({l:l==='⌫'?'backspace':l,bg:l?'#F3F6FA':'transparent',font:l==='⌫'?"'Material Symbols Outlined'":'inherit',size:l==='⌫'?'24px':'26px'}));
+const E=(s,inCard,dark,sheet)=>{const [t,...r]=s.split('|');const k=MAP[t]||t;const o={a:r[0]||'',b2:r[1]||'',c2:r[2]||'',pad:'0',align:'left',jc:'flex-start'};o[k]=true;
+  o.tc=dark?'rgba(255,255,255,.75)':'#6B7280';
+  if(k==='b'){const red=t==='bd';o.bg=red?'#C62828':'#002E6E';o.bs=red?'rgba(198,40,40,.55)':'rgba(0,46,110,.55)';o.op=t==='boff'?.4:1;o.lock=/lock/i.test(o.a)||t==='bl';}
+  if(k==='o'){o.col=t==='od'?'#C62828':'#002E6E';o.obg=t==='od'?'#FDEDED':'#EAF1FB';}
+  if(k==='c'||k==='l'||k==='er'){const al=r[1]==='c'?'center':r[1]==='r'?'right':'left';o.align=al;o.jc=al==='center'?'center':al==='right'?'flex-end':'flex-start';}
+  if(k==='l'){o.lcol=/^Cancel$/.test(o.a)?'#002E6E':/^Delete/.test(o.a)?'#C62828':'#00658F';o.lmh=r[1]==='c'?'44px':'auto';if(/^\+ /.test(o.a))o.a=o.a;}
+  if(k==='i'){o.ibg=dark?'repeating-linear-gradient(135deg,rgba(255,255,255,.10) 0 8px,rgba(255,255,255,.04) 8px 16px)':'repeating-linear-gradient(135deg,#D6ECF9 0 8px,#E8F5FD 8px 16px)';o.icol=dark?'rgba(255,255,255,.8)':'#00658F';}
+  if(k==='tiles')o.tl=r.map((x,i)=>({x,icon:TILE[x]||'apps',op:t==='tilesoff'&&i===0?.35:1}));
+  if(k==='tot')o.col=t==='terr'?'#C62828':'#0A8F5B';
+  if(k==='big'||k==='bal'){o.col=dark?'#fff':t==='bigw'||t==='balw'?'#B26A00':t==='bigg'||t==='balg'?'#0A8F5B':'#101010';o.align=r[1]==='c'?'center':'left';}
+  if(k==='tag')o.self=inCard?'center':'flex-start';
+  if(k==='ttl')o.col=r[1]==='w'?'#B26A00':'#101010';
+  if(k==='inp')o.op=t==='inoff'?.4:1;
+  if(k==='h'){o.hasBack=r[2]!=='nb';const tg=r[1]||'';o.hasIcon=tg.startsWith('@');if(o.hasIcon){o.c2=tg.slice(1);o.hasTag=false;}else o.hasTag=!!tg;o.tagBg=tg==='Assign now'?'#BFEBFB':tg==='Demo'?'#FBF3E4':/Step/.test(tg)?'#fff':'#EEF1F6';o.tagColor=tg==='Demo'?'#8A5300':tg==='Assign now'?'#002E6E':'#4A5466';}
+  if(k==='st')o.hasB=r[1]!=='n';
+  if(k==='k'){const gray=r[3]==='gray';o.hasTg=r[2]==='on'||r[2]==='off';o.chev=r[2]==='chev';o.tgBg=r[2]==='on'?'#002E6E':'#D5DAE1';o.tgJ=r[2]==='on'?'flex-end':'flex-start';o.icon=gray?'account_balance':(r[3]||'account_balance');o.kbg=inCard?'transparent':'#F7F9FC';o.kp=inCard?'0':'14px';o.tbg=sheet&&!inCard?'#002E6E':gray?'#F3F6FA':'#EAF1FB';o.tcol=sheet&&!inCard?'#fff':gray?'#6B7280':'#002E6E';const money=/^₹/.test(o.b2);o.kfs='16px';o.kfw='600';o.kcol='#101010';o.kls='0';if(money){const tmp=o.a;o.a=o.b2;o.b2=tmp;o.kfs='22px';o.kfw='700';o.kls='-0.3px';}}
+  if(k==='tg'){o.tgBg=r[1]==='on'?'#002E6E':'#D5DAE1';o.tgJ=r[1]==='on'?'flex-end':'flex-start';}
+  if(k==='r'){o.lc='#6B7280';o.col=r[2]==='g'?'#0A8F5B':r[2]==='w'?'#B26A00':r[2]==='l'?'#7A8698':'#101010';if(r[2]==='l')o.lc='#7A8698';}
+  if(k==='g'){o.icon=gi(o.a);const ns=(o.b2.match(/₹[\d,]+/g)||[]).map(num);o.prog=ns.length>1&&ns[1]?Math.min(100,ns[0]/ns[1]*100).toFixed(1)+'%':'0%';const parts=o.c2.split(' · ');o.needs=parts[0]||'';o.share=parts[1]?parts[1]+' of credits':'';const ch=r[3]||'On track';o.chip=ch;o.chipBg=/Behind/.test(ch)?'#FBF3E4':'#E3F3EC';o.chipCol=/Behind/.test(ch)?'#B26A00':'#0A8F5B';o.hasNote=r[4]==='note';}
+  if(k==='p'){o.icon=gi(o.a);o.subCol=o.b2.startsWith('−')?'#B26A00':o.b2.startsWith('₹')?'#0A8F5B':'#6B7280';o.field=!!o.c2&&!o.c2.endsWith('!');o.fixed=!o.field&&!!o.c2;o.pct=o.c2.replace('%','');if(o.fixed)o.c2=o.c2.replace('!','');const locked=o.fixed&&/^₹/.test(o.c2);o.tbg=locked?'#EEF1F6':'#EAF1FB';o.tcol=locked?'#7A8698':'#002E6E';o.fcol=locked?'#4A5466':'#101010';}
+  if(k==='pr'){o.lines=r.slice(1).filter(x=>x!=='+btn');o.hasBtns=r.includes('+btn');}
+  if(k==='chips')o.items=r;
+  if(k==='row3'){o.btns=r.map(x=>{const off=x.endsWith('~');const l=x.replace('~','');const pri=/^(Continue|Confirm|Save|Lock|Move|Edit goal)/.test(l);return {l:l==='Fill a form instead'?'Use a form':l,bg:pri?'#002E6E':'#EAF1FB',col:pri?'#fff':'#002E6E',sh:pri?'0 12px 24px -12px rgba(0,46,110,.55)':'none',op:off?.4:1};});o.cols='repeat('+r.length+',1fr)';}
+  if(k==='pad2')o.keys=KEYS;
+  if(k==='dots')o.d4=r[0]==='full'?'#002E6E':'transparent';
+  if(k==='tabs')o.tb=[['Goals','savings'],['History','receipt_long'],['Ask','forum']].map(([l,icon])=>({l,icon,col:l===(r[0]||'Goals')?'#002E6E':'#8A94A6',pill:l===(r[0]||'Goals')?'#EAF1FB':'transparent'}));
+  if(k==='hrow'){const ti=o.a;o.icon=/Transfer/.test(ti)?'swap_horiz':/Withdrawal/.test(ti)?'north':/deleted/.test(ti)?'delete':/Opening/.test(ti)?'lock':'south';o.open=o.c2==='Assign now';o.locked=!o.open;o.date=o.open?'Today':o.c2;o.ib=o.open?'#002E6E':'#EEF1F6';o.ic=o.open?'#fff':'#7A8698';}
+  if(k==='x')o.lrows=r.slice(1).map(x=>{const [n,v]=x.split(':');return {n,v};});
+  return o;};
+const TILE=TILEMAP;
+const HEROBG='#002E6E radial-gradient(120% 90% at 100% 0%,rgba(0,185,241,.30) 0,rgba(0,185,241,0) 60%)';
+const SHV='0 1px 2px rgba(16,24,40,.04),0 0 0 1px rgba(0,46,110,.05)';
+const build=(els,sheet)=>{const blocks=[];let cur=null;const dock=[];
+  els.forEach(s=>{if(s.startsWith('[')){cur={els:[],kind:s};blocks.push(cur);return;}if(s===']'){cur=null;return;}
+    const e=E(s,!!cur,cur&&cur.kind==='[h',sheet);
+    if(cur){cur.els.push(e);return;}
+    if(!sheet&&(e.b||e.o||e.row3||e.chips||e.inp||((e.l||e.c)&&dock.length))){dock.push(e);return;}
+    if(e.sp&&!sheet)return;
+    blocks.push({els:[e],kind:e.tabs?'tabs':e.sp?'sp':'loose'});});
+  if(dock.length){const ti=blocks.findIndex(b=>b.kind==='tabs');const db={els:dock,kind:'dock'};if(ti>=0)blocks.splice(ti,0,db);else blocks.push(db);}
+  return blocks.map(b=>{const k=b.kind;const st={bg:'transparent',sh:'none',pad:'0',gap:'0',radius:'0',flex:'none',margin:'0'};
+    if(k==='['||k==='[e'){Object.assign(st,{bg:sheet?'#F7F9FC':'#fff',sh:sheet?'none':SHV,pad:k==='[e'?'4px 18px':'18px',gap:k==='[e'?'0':'12px',radius:'24px'});}
+    if(k==='[s')Object.assign(st,{bg:'#E3F4FD',pad:'18px',gap:'12px',radius:'24px'});
+    if(k==='[h')Object.assign(st,{bg:HEROBG,sh:'0 18px 36px -20px rgba(0,46,110,.7)',pad:'20px',gap:'6px',radius:'28px'});
+    if(k==='dock')Object.assign(st,{gap:'8px',margin:'auto 0 0',pad:'14px 0 0'});
+    if(k==='loose')st.gap='10px';
+    if(k==='sp')st.flex='1';
+    if(k==='tabs')st.margin=sheet?'auto 0 0':(blocks.some(x=>x.kind==='dock')?'0 -12px':'auto -12px 0');
+    return {els:b.els,...st};});};
+const F=(id,name,els,note)=>{const hasTabs=els.some(x=>x.startsWith('tabs'));return {isFrame:true,id,name,blocks:build(els,false),note:note||'',hasNote:!!note,sheet:false,under:'',screenBg:'#F4F6FA',barBg:'transparent',fill:'0',fillDisp:'none',cflex:'1',cbg:'#F4F6FA',cr:'0',cpad:hasTabs?'0 12px 0':'0 12px 30px'};};
+const S=(id,name,under,els,note)=>({...F(id,name,els,note),blocks:build(els,true),sheet:true,under,screenBg:'#5B6676',fill:'1',fillDisp:'flex',cflex:'none',cbg:'#fff',cr:'28px 28px 0 0',cpad:'10px 20px 36px'});
+const A=label=>({isArrow:true,label});
+const R=label=>({isRef:true,label});
+const ROW=(label,items)=>({label,items});
+
+const CONSENT=['st|Allow PiPlanner to check this balance?|n','t|Savings · HDFC ••4821','ck|Reads only this balance','ck|Stores the last balance to find what is new','ck|Never sends statements, payees, UPI ids or account numbers to Grok','ck|Change it any time in Settings','b|Yes, update automatically',"o|No, I'll update it myself"];
+const UPD=['st|Update balance','k|Manually|Type the amount yourself||edit','k|Balance sync|Check with your UPI PIN||sync'];
+const PIN=['h|Check balance|Demo','[','dots','pad',']','b|Check balance','l|Cancel|c'];
+const BAL=(amt,cap,tiles)=>['hdr','[h','gr','t|Dedicated savings · HDFC ••4821',`bal|${amt}`,`t|${cap}`,tiles||'tiles|Sync|New goal|Transfer|History',']'];
+const GOALS60=['[','sec|Your Goals|View All','g|Car|₹60,000 of ₹13,10,796|Needs ₹26,058 a month · 60%','g|Emergency|₹40,000 of ₹2,14,000|Needs ₹14,500 a month · 40%','l|+ New goal',']'];
+const GOALS1=['[','sec|Your Goals|View All','g|Car|₹60,000 of ₹13,10,796|Needs ₹26,058 a month · 60%',']'];
+const GOALS2=['[','sec|Your Goals|View All','g|Car|₹85,000 of ₹13,10,796|Needs ₹25,537 a month · 50%|Behind ₹1,058','g|Emergency|₹55,000 of ₹2,14,000|Needs ₹13,250 a month · 30%',']'];
+const GOALS3=['[','sec|Your Goals|View All','g|Car|₹85,000 of ₹13,10,796|Needs ₹25,537 a month · 50%|Behind ₹1,058','g|Emergency|₹55,000 of ₹2,14,000|Needs ₹13,250 a month · 30%','g|Vacation|₹10,000 of ₹51,720|Needs ₹6,953 a month · 20%',']'];
+const LOCK60='x|Already saved, not changing|Car:₹60,000|Emergency:₹40,000';
+const ENTRY_HEAD=(typed)=>['[','r|Previous balance|₹1,00,000',...(typed?[]:['r|Balance now|₹1,50,000']),'bigg|₹50,000|New amount',']',LOCK60];
+
+const SECTIONS=[
+{id:'J1',title:'First-time setup',desc:'Screens 1–8, a one-time stack. Ends on the opening History entry: Car ₹60,000, Emergency ₹40,000.',rows:[
+ ROW('MAIN PATH · CONSENT YES',[
+  F('1','Welcome',['h|PiPlanner','[h','i|hero illustration: goals','hero',']','[','sec|How it works','k|Pick a savings account|Only its balance is read.||looks_one','k|Set your goals|A target, an end date and a share of each credit.||looks_two','k|Split every new credit|Saved amounts lock, so they stay put.||looks_3',']','sp','b|Set up savings']),A('Set up savings'),
+  F('2','Accounts',['h|Accounts|Step 1 of 3','H|Your accounts','t|Pick one for dedicated savings.','[','k|Savings · HDFC ••4821|₹1,00,000','tg|Dedicated savings|on',']','[','k|Spending · SBI ••7730|₹72,000||gray','tg|Dedicated savings|off','t|Everyday spend. Not split across goals.',']','sp','b|Continue'],'Turning one on turns the other off. Continue is disabled until exactly one account is dedicated.'),A('Continue'),
+  S('3','Consent sheet','Accounts',CONSENT,'Asked for the account where credits and income arrive.'),A('Yes'),
+  F('3a','Opening balance fetched',['h|Balance|Step 2 of 3|nb','[','ok|Balance read automatically|₹1,00,000|Savings · HDFC ••4821',']','sp','b|Continue']),A('Continue'),R('→ 5 Goal chat')]),
+ ROW('CONSENT NO · TYPE THE OPENING BALANCE',[
+  S('4','Update balance','Accounts',UPD),A('Manually'),
+  F('4a','Manual amount · setup',['h|Opening balance|Step 2 of 3','H|How much is in this account?','[','amt|1,00,000',']','sp','b|Continue'],'Continue is disabled at ₹0. No withdrawal link during setup.'),A('Continue'),R('→ 5 Goal chat')]),
+ ROW('CONSENT NO · BALANCE SYNC BRANCHES',[
+  S('4','Update balance','Accounts',UPD),A('Balance sync · account in Paytm'),
+  F('4b','UPI PIN',PIN,'The pad is a mock, labelled Demo.'),A('PIN ok'),
+  F('4b·2','Balance fetched',['h|Balance|Step 2 of 3|nb','[','ok|Balance fetched|₹1,00,000|HDFC Bank ••4821',']','sp','b|Continue']),A('Continue'),R('→ 5 Goal chat')]),
+ ROW('',[
+  S('4c','Account on another UPI app','Accounts',[...UPD,"w|This account is not linked in Paytm, so we can't check it. Enter the balance instead."],'Moves to 4a Manual amount.'),A('Moves on'),R('→ 4a Manual amount'),
+  F('4d','Wrong PIN',['h|Check balance|Demo','[','dots|full','er|Incorrect PIN.|c','pad',']','b|Check balance','l|Cancel|c']),A('Wrong or cancelled'),
+  S('4e','Back to the choice','UPI PIN',['er|Incorrect PIN. Try again or enter it manually.',...UPD],'Manually is still available.')]),
+ ROW('GOALS · CHAT FIRST, FORM AS FALLBACK',[
+  F('5','Goal chat',['h|Plan your goals|Step 3 of 3|nb','H|What are you planning for?','t|Describe your goals in a sentence. ₹1,00,000 is ready to split.','sp','chips|A ₹10 lakh car by Sep 2030 and a ₹2 lakh emergency fund in a year','in|Describe a goal','row3|Fill a form instead|Continue~'],'Continue is disabled until percentages sum to 100.'),A('Vague sentence'),
+  F('5a','Follow-up',['h|Plan your goals|Step 3 of 3|nb','H|What are you planning for?','u|I want to save for a car','gk|What is the target amount, and by when?','u|Soon','gk|Roughly how much, and which month and year?','sp','in|Describe a goal','row3|Fill a form instead|Continue~'],'At most two follow-ups, then the Goal form opens.'),A('Target and date known'),
+  F('5b','Goal drafts',['u|A ₹10 lakh car by Sep 2030 and a ₹2 lakh emergency fund in a year','pr|Car · Emergency|Car: ₹10,00,000 by Sep 2030 · 7% inflation|Emergency: ₹2,00,000 by Sep 2027 · 7% inflation|Split of ₹1,00,000: Car 60% ₹60,000 · Emergency 40% ₹40,000|+btn','[','sec|Your goals|','p|Car|₹60,000 of ₹1,00,000|60','p|Emergency|₹40,000 of ₹1,00,000|40','tot|Total 100%',']','sp','row3|Fill a form instead|Continue']),A('Continue'),
+  S('7','Inflation popup','Goal chat',['st|Inflation','step|7%','gl|At 7% a year, Car\'s ₹10,00,000 becomes ₹13,10,796 by Sep 2030. PiPlanner starts at 7% as a cautious default.','t|Estimate, not a guarantee.','r|Car|₹10,00,000 → ₹13,10,796','r|Emergency|₹2,00,000 → ₹2,14,000','b|Use this rate'],'The adjusted target updates as the stepper moves.'),A('Use this rate'),
+  F('8','Opening split',['h|Opening split|Step 3 of 3','[h','t|Dedicated savings · HDFC ••4821','bal|₹1,00,000',']','[','sec|Split ₹1,00,000|','p|Car|₹60,000 · needs ₹26,058 a month|60','p|Emergency|₹40,000 · needs ₹14,500 a month|40','tot|Total 100%',']','sp','b|Lock this split','c|Locked amounts never change.|c']),A('Lock'),R('Opening entry written → 9 Goals tab')]),
+ ROW('GOAL FORM AND THE ONE-GOAL CASE',[
+  F('5c','Grok unavailable',['h|Plan your goals|Step 3 of 3|nb','H|What are you planning for?','w|Grok is unavailable. You can still do this by hand.','sp','inoff|Describe a goal','row3|Fill a form instead|Continue~'],'The Goal form opens directly.'),A('Fill a form · Edit'),
+  F('6','Goal form · create',['h|New goal','[e','r|Name|Car','r|Target|₹10,00,000','r|Start|Oct 2026','r|End|Sep 2030','r|Inflation · estimate, not a guarantee|7% ›',']','[','r|Share of new credits|100%','t|Only goal, so it gets 100%.',']','[','r|Saved so far|₹0 · locked|l','r|Target with inflation|₹13,10,796','r|Needs a month|₹27,308',']','b|Save'],'Save is disabled if the name is empty, the target is ₹0, or the end date is not after the start date.'),A('Save'),
+  F('8b','Opening split · one goal',['h|Opening split|Step 3 of 3','[h','t|Dedicated savings · HDFC ••4821','bal|₹1,00,000',']','[','sec|Split ₹1,00,000|','p|Car|₹1,00,000 · needs ₹25,225 a month|100%!','t|This is your only goal, so it gets 100%.',']','sp','b|Lock this split'],'No percentage fields.')])
+]},
+{id:'J2',title:'A new amount arrives',desc:'Sync, Update balance and a typed amount all land on the same open History entry.',rows:[
+ ROW('CONSENT YES · SYNC FINDS MORE',[
+  F('9','Goals tab',[...BAL('₹1,00,000','Last synced today, 7:42 pm'),...GOALS60,'tabs']),A('Sync'),
+  S('10','Sync sheet','Goals tab',['st|Balance sync','r|Previous balance|₹1,00,000','r|Fetched balance|₹1,50,000','bigg|+₹50,000|New amount','b|Continue']),A('Higher · Continue'),
+  F('13','History entry · open',['h|New credit|Assign now',...ENTRY_HEAD(false),'[','sec|Split ₹50,000|This credit only','r|Car|60% · ₹30,000','r|Emergency|40% · ₹20,000','l|Update percentages for this amount',']','b|Save and lock','c|You can change this split once.|c','l|Create a goal   ·   Edit a goal   ·   Delete a goal|c']),A('Keep · Save'),
+  F('13a','Entry · saved',['h|New credit','[','r|Previous balance|₹1,00,000','r|Balance now|₹1,50,000','bigg|₹50,000|New amount','tag|Saved and locked',']','[','sec|Split|','p|Car|60% of ₹50,000|₹30,000!','p|Emergency|40% of ₹50,000|₹20,000!',']','c|Amounts count up, then the lock appears.|c'],'Entry frozen, totals updated, next Sync allowed.')]),
+ ROW('SYNC OUTCOMES',[
+  F('10a','Same balance',[...BAL('₹1,00,000','Last synced today, 7:42 pm'),...GOALS1,'toast|No new credit since the last sync.','tabs'],'Message only, nothing written.'),A('Lower'),
+  S('10b','Lower balance','Goals tab',['st|Balance sync','r|Previous balance|₹1,50,000','r|Fetched balance|₹1,42,000','bigw|−₹8,000|Went down by','w|Your savings balance went down by ₹8,000.','b|Continue']),A('Continue'),R('→ 18 Withdrawal sheet'),
+  F('9b','Entry left open',[...BAL('₹1,00,000','Last synced today, 7:42 pm','tilesoff|Sync|New goal|Transfer|History'),'ban|₹50,000 to assign',...GOALS1,'tabs'],'No new Sync or Update balance until the entry is saved.')]),
+ ROW('CONSENT NO · UPDATE BALANCE',[
+  F('11','Goals · consent No',[...BAL('₹1,00,000','Last updated today, 7:42 pm','tiles|Update balance|New goal|Transfer|History'),...GOALS60,'tabs']),A('Update balance'),
+  S('11a','Update balance','Goals tab',UPD),A('Manually'),
+  F('11b','Manual amount · later',['h|Add money','H|How much did you add?','[','amt|50,000',']','b|Continue','l|Record a withdrawal']),A('Continue'),
+  F('13t','Entry · typed',['h|New credit|Typed',...ENTRY_HEAD(true),'[','sec|Split ₹50,000|This credit only','r|Car|60% · ₹30,000','r|Emergency|40% · ₹20,000','l|Update percentages for this amount',']','sp','b|Save and lock'],'A typed entry has no "Balance now" line.')]),
+ ROW('',[
+  S('11a','Update balance','Goals tab',UPD),A('Balance sync · in Paytm'),F('11c','UPI PIN',PIN),A('PIN ok'),R('→ 10 Sync sheet → 13 open entry'),A('Other UPI app'),R('→ 11b Manual amount')]),
+ ROW('CHANGING THE SPLIT FOR THIS AMOUNT · ONCE',[
+  F('13b','Update percentages',['h|New credit|Assign now','[','bigg|₹50,000|New amount',']','[','sec|Split ₹50,000|This credit only','p|Car|₹25,000|50','p|Emergency|₹15,000|30','l|+ Create a goal','tot|',']','terr|Total 80%. Assign the remaining 20%.','tg|Use this split from the next credit too|on','sp','boff|Save and lock'],'Save is disabled until the total is 100%. Only this amount changes; the opening entry stays 60/40.'),A('Create a goal'),
+  F('6c','Goal form · from the entry',['h|New goal','[e','r|Name|Vacation','r|Target|₹50,000','r|Start|Oct 2026','r|End|Mar 2027','r|Inflation · estimate, not a guarantee|7% ›',']','[','r|Target with inflation|₹51,720','r|Needs a month|₹8,620',']','sp','b|Save']),A('Back to the entry'),
+  F('13c','Demo split',['h|New credit|Assign now','[','sec|Split ₹50,000|This credit only','p|Car|₹25,000 · ₹1,058 behind this month|50','p|Emergency|₹15,000|30','p|Vacation|₹10,000|20','tot|Total 100%','tg|Use this split from the next credit too|on',']','gl|₹1,00,000 was already assigned. This ₹50,000 is new. Car gets ₹1,058 less than it needs.','b|Save and lock']),A('Save'),
+  F('13d','Saved · custom split',['h|New credit','[','bigg|₹50,000|New amount','tag|Saved and locked · Custom split',']','[','sec|Split|','p|Car|50% of ₹50,000|₹25,000!','p|Emergency|30% of ₹50,000|₹15,000!','p|Vacation|20% of ₹50,000|₹10,000!',']','c|A second change is not offered.|c'])]),
+ ROW('OTHER ENTRY STATES',[
+  F('13e','One goal',['h|New credit|Assign now',...ENTRY_HEAD(false).slice(0,6),'[','sec|Split ₹50,000|This credit only','r|Car|100% · ₹50,000','t|This is your only goal, so it gets 100%.','l|+ Create a goal',']','sp','b|Save and lock'],'The customer can still create a goal for this amount.'),A('Type to Grok'),
+  F('13f','Proposal from the entry',['H|Ask','u|Add a ₹50,000 vacation by March','pr|New goal: Vacation|₹50,000 by Mar 2027, 7% inflation|This ₹50,000: Car ₹25,000 · Emergency ₹15,000 · Vacation ₹10,000|+btn','sp','in|Ask Grok','tabs|Ask'],'Confirm returns to the entry with the split filled in.'),A('Edit a goal'),
+  F('13g','Edit held for the next credit',['h|Edit goal','[e','r|Name|Car','r|Target|₹10,00,000','r|End|Sep 2031',']','[','r|Share of new credits|50%','w|Changes apply at the next credit. Earlier history stays as it is.',']','sp','b|Save'])])
+]},
+{id:'J3',title:'Managing goals',desc:'Create, read, update and delete. Reachable from the Goals tab at any time and from an open History entry.',rows:[
+ ROW('READ AND UPDATE',[
+  F('14','Goal detail',['h|Car|@edit','[','k|Saved so far|₹85,000 · Behind ₹1,058||directions_car','bar|6.5%','c|of ₹13,10,796 adjusted target · 6% reached',']','[e','r|Needs a month|₹25,537','r|Dates|Oct 2026 – Sep 2030','r|Inflation|7%','r|Share of new credits|50% · ₹25,000 per ₹50,000',']','[','sec|From History|','hrow|New credit · Custom split|+₹25,000|5 Oct','hrow|Opening balance|₹60,000|1 Oct',']','row3|Transfer|Edit goal','l|Delete goal|c']),A('Edit'),
+  F('6e','Goal form · edit',['h|Edit goal','[e','r|Name|Car','r|Target|₹10,00,000','r|Start|Oct 2026','r|End|Sep 2031','r|Inflation · estimate, not a guarantee|7% ›',']','[','r|Share of new credits|50%','w|Changes apply at the next credit. Earlier history stays as it is.',']','[','r|Saved so far|₹85,000 · locked|l','r|Target with inflation|₹14,02,552',']','b|Save']),A('Save'),
+  F('9c','Card after an edit',[...BAL('₹1,50,000','Last synced today, 7:42 pm'),'[','sec|Your Goals|View All','g|Car|₹85,000 of ₹13,10,796|Needs ₹25,537 a month · 50%|Behind ₹1,058|note','g|Emergency|₹55,000 of ₹2,14,000|Needs ₹13,250 a month · 30%',']','tabs'],'Held until the next transaction.')]),
+ ROW('CREATE OUTSIDE AN ENTRY',[
+  F('6n','New goal from the Goals tab',['h|New goal','[e','r|Name|Home','r|Target|₹5,00,000','r|Start|Oct 2026','r|End|Sep 2031','r|Inflation · estimate, not a guarantee|7% ›',']','[','r|Share of new credits|15%','t|₹7,500 of every ₹50,000 credit',']','sp','b|Save'],'Starts at ₹0 saved.'),A('Two or more goals'),
+  S('15','Standing split sheet','Goals tab',['st|Standing split','t|Used for the next credit. Saved money stays where it is.','p|Car|₹22,500 of every ₹50,000|45','p|Emergency|₹15,000 of every ₹50,000|30','p|Vacation|₹5,000 of every ₹50,000|10','p|Home|₹7,500 of every ₹50,000|15','tot|Total 100%','b|Save'],'Save is enabled at 100%. Skipped with one goal; that goal is set to 100%.')]),
+ ROW('DELETE · OTHER GOALS REMAIN',[
+  F('17','Delete Vacation',['h|Delete Vacation','[','ttl|This releases ₹10,000.','t|Choose where it goes.','p|Car|₹5,000|50','p|Emergency|₹5,000|50','l|+ Create a goal','tot|Total 100%','t|Split equally. Change it once.',']','[','t|New credits will then split','ttl|Car 62.5% · Emergency 37.5%',']','bd|Delete and move ₹10,000','l|Cancel|c']),A('Edit once'),
+  F('17a','Edited to 60/40',['h|Delete Vacation','[','ttl|This releases ₹10,000.','t|Choose where it goes.','p|Car|₹6,000|60','p|Emergency|₹4,000|40','l|+ Create a goal','tot|Total 100%',']','sp','bd|Delete and move ₹10,000','l|Cancel|c']),A('Confirm'),
+  F('17b','Entry written',['H|History','[e','hrow|Vacation deleted|₹10,000 moved · Car ₹6,000 · Emergency ₹4,000|5 Oct','hrow|New credit · Custom split|₹1,00,000 → ₹1,50,000 · +₹50,000|5 Oct','hrow|Opening balance|₹1,00,000 · Car ₹60,000 · Emergency ₹40,000|1 Oct',']','tabs|History'],'Goal removed, standing split renormalised.')]),
+ ROW('DELETE · FEW OR NO GOALS LEFT',[
+  F('17c','Only Car remains',['h|Delete Emergency','[','ttl|This releases ₹55,000.','t|Choose where it goes.','p|Car|₹55,000|100','l|+ Create a goal','tot|Total 100%',']','sp','bd|Delete and move ₹55,000','l|Cancel|c']),A('Create Vacation here'),
+  F('17d','Equal again',['h|Delete Emergency','[','ttl|This releases ₹55,000.','t|Choose where it goes.','p|Car|₹27,500|50','p|Vacation|₹27,500|50','l|+ Create a goal','tot|Total 100%',']','sp','bd|Delete and move ₹55,000','l|Cancel|c'],'Creating a goal resets the rows to equal shares.'),A(''),
+  F('17e','Deleting the only goal',['h|Delete Car','[','ttl|This releases ₹85,000.','t|Choose where it goes.','w|Create a goal to receive this money.','l|+ Create a goal',']','sp','boff|Delete and move ₹85,000','l|Cancel|c'],'Confirm stays disabled until a goal is created on this screen.')])
+]},
+{id:'J4',title:'Transfer between goals',desc:'From Goal detail, the Goals tab, or a typed sentence. One transfer entry; the standing split is unchanged.',rows:[
+ ROW('',[
+  F('16','Transfer',['h|Transfer|@receipt_long','[','k|From · Emergency|₹55,000 saved|chev|medical_services',']','[','k|To · Car|₹85,000 saved|chev|directions_car',']','[','amt|5,000','chips|₹1,000|₹5,000|₹10,000',']','[','sec|After transfer|','r|Emergency|₹55,000 → ₹50,000|w','r|Car|₹85,000 → ₹90,000|g',']','b|Move ₹5,000']),A('Confirm'),
+  F('16a','Transfer entry',['H|History','[e','hrow|Transfer|Emergency → Car · ₹5,000|5 Oct','hrow|New credit · Custom split|₹1,00,000 → ₹1,50,000 · +₹50,000|5 Oct','hrow|Opening balance|₹1,00,000|1 Oct',']','tabs|History'],'Car ₹90,000, Emergency ₹50,000.'),A(''),
+  F('16b','Amount too high',['h|Transfer|@receipt_long','[','k|From · Emergency|₹55,000 saved|chev|medical_services',']','[','k|To · Car|₹85,000 saved|chev|directions_car',']','[','amt|60,000','er|Emergency has only ₹55,000 saved.|c',']','sp','boff|Move ₹60,000'],'Confirm is disabled.'),A('Typed sentence'),
+  F('16c','From the Ask tab',['H|Ask','u|Move 5k from Emergency to Car','pr|Move ₹5,000 from Emergency to Car|Emergency keeps ₹50,000 · Car reaches ₹90,000|+btn','sp','in|Ask Grok','tabs|Ask']),A('Confirm'),R('→ 16 Transfer, pre-filled')])
+]},
+{id:'J5',title:'Balance went down',desc:'Sync finds a lower balance, or the customer records a withdrawal by hand.',rows:[
+ ROW('',[
+  R('10b Sync · lower balance'),A('or'),
+  F('18c','Record a withdrawal',['h|Record withdrawal','H|How much did you take out?','[','amt|8,000',']','b|Continue','l|Record money added'],'Consent No route.'),A('Continue'),
+  F('18','Withdrawal sheet',['h|Withdrawal','[','ttl|Your savings balance went down by ₹8,000.|w','t|Choose which goals it comes from.','p|Car|−₹4,857|60.7','p|Emergency|−₹3,143|39.3','tot|Total 100%',']','sp','b|Save and lock'],'Proposed in proportion to each goal\'s saving.'),A('Edit once'),
+  F('18a','Edit · invalid',['h|Withdrawal','[','ttl|Your savings balance went down by ₹8,000.|w','t|Choose which goals it comes from.','p|Car|−₹6,400|80','p|Emergency|−₹800|10','terr|Total 90%. Assign the remaining 10%.',']','sp','boff|Save and lock'],'Reductions must equal the shortfall. No goal goes below ₹0.'),A('Confirm'),
+  F('18b','Withdrawal entry',['H|History','[e','hrow|Withdrawal|₹1,50,000 → ₹1,42,000 · Car −₹4,857 · Emergency −₹3,143|5 Oct','hrow|Transfer|Emergency → Car · ₹5,000|5 Oct','hrow|Opening balance|₹1,00,000|1 Oct',']','tabs|History'])])
+]},
+{id:'J6',title:'Checking history',desc:'Every entry, newest first. Saved entries open read-only; the opening entry keeps its original amounts.',rows:[
+ ROW('',[
+  F('12','History tab',['H|History','[e','hrow|New credit|₹1,50,000 → ₹2,00,000 · ₹50,000 to assign|Assign now','hrow|Transfer|Emergency → Car · ₹5,000|5 Oct','hrow|New credit · Custom split|₹1,00,000 → ₹1,50,000 · +₹50,000|5 Oct','hrow|New credit · Typed|+₹20,000|4 Oct','hrow|Vacation deleted|₹10,000 moved|4 Oct','hrow|Opening balance|₹1,00,000 · Car ₹60,000 · Emergency ₹40,000|1 Oct',']','tabs|History']),A('Open entry'),R('→ 13 History entry (open)'),A('Saved entry'),
+  F('12a','Opening entry · read-only',['h|Opening balance','[','bal|₹1,00,000|c','tag|Saved and locked',']','[','sec|Assigned|','p|Car|60% of ₹1,00,000|₹60,000!','p|Emergency|40% of ₹1,00,000|₹40,000!',']','c|Original amounts never change.|c']),A('Goal detail'),R('14 shows the same slices for one goal')])
+]},
+{id:'J7',title:'Changing the consent answer',desc:'Settings switches between Sync and Update balance. Nothing else changes.',rows:[
+ ROW('',[
+  F('20','Settings',['h|Settings','[','sec|Linked accounts|','k|Savings · HDFC ••4821|Dedicated savings · Linked in Paytm','k|Spending · SBI ••7730|Everyday spend. Not split across goals.',']','[','tg|Automatic balance updates|on|b','t|On. PiPlanner reads this balance when you tap Sync.',']','od|Reset demo','c|Clears goals and history and returns to Welcome.|c']),A('Switch off'),
+  F('20a','Consent No mode',[...BAL('₹1,50,000','Last updated today, 7:42 pm','tiles|Update balance|New goal|Transfer|History'),...GOALS2,'tabs'],'Update balance replaces Sync.'),A('Switch on'),
+  S('20b','Consent sheet again','Settings',CONSENT),A('Next Sync'),
+  S('20c','One new amount','Goals tab',['st|Balance sync','r|Previous balance|₹1,50,000','r|Fetched balance|₹1,70,000','bigg|+₹20,000|New amount','t|Anything not typed in the meantime arrives as one amount.','b|Continue']),A('Reset demo'),R('→ 1 Welcome')])
+]},
+{id:'J8',title:'Ask tab',desc:'Questions are answered from engine numbers. Action sentences return a proposal card whose Confirm opens the matching sheet.',rows:[
+ ROW('',[
+  F('19','Ask tab',['H|Ask','[','t|Ask about your plan, or tell Grok what to do. Changes come back as a card to confirm.',']','sp','chips|What happens if I change the split?|Why is inflation 7%?','in|Ask Grok','tabs|Ask']),A('Question'),
+  F('19a','Answer from the engine',['H|Ask','u|Why is inflation 7%?','gk|PiPlanner starts every goal at 7% a year to estimate future prices. At 7%, Car\'s ₹10,00,000 becomes ₹13,10,796 by Sep 2030. It is an estimate, not a guarantee.','sp','in|Ask Grok','tabs|Ask'],'Plain text only when nothing changes.'),A('Action sentence'),
+  F('19b','Proposal card',['H|Ask','u|Move 5k from Emergency to Car','pr|Move ₹5,000 from Emergency to Car|Emergency keeps ₹50,000 · Car reaches ₹90,000|+btn','sp','in|Ask Grok','tabs|Ask'],'Confirm opens the matching sheet, pre-filled.'),A(''),
+  F('19c','Grok unavailable',['H|Ask','w|Grok is unavailable. You can still do this by hand.','sp','inoff|Ask Grok','tabs|Ask'],'Forms and sliders, template sentences.'),A(''),
+  F('19d','Draft fails validation',['H|Ask','u|Add a trip','gk|How much is the trip, and by when?','t|Asked once more, then the Goal form opens.','sp','in|Ask Grok','tabs|Ask'],'Invalid drafts are never shown.')])
+]}];
+const EDGES=[['No account marked dedicated','Cannot continue past Accounts','2'],['Consent No','Each update asks: Manually, or Balance sync','4, 11a'],['Balance sync, account in Paytm','UPI PIN → Check balance → Fetch','4b, 11c'],['Balance sync, account on another UPI app','Falls back to manual entry','4c'],['Wrong or cancelled PIN','Back to the choice; Manually still available','4d, 4e'],['Only one goal','Share is 100% by default; no split fields. A second goal reopens the split','8b, 13e, 15'],['Percentages do not sum to 100','Save or Confirm disabled, running total shown','13b, 18a'],['Sync with unchanged balance','Message only, nothing written','10a'],['Sync with lower balance','Withdrawal sheet','10b, 18'],['Entry left open','Banner on Goals; no new Sync or Update balance until saved','9b'],['Second percentage change on the same entry','Not offered','13d'],['Goal edited','Held until the next transaction; card shows "Change saved"','6e, 9c'],['Goal created outside an entry','Starts at ₹0, standing split reopens','6n, 15'],['Transfer larger than saved amount','Confirm disabled','16b'],['Deleting the only goal','Must create a goal on the delete screen first','17e'],['Grok unavailable','Forms and sliders, template sentences','5c, 19c'],['Grok draft fails validation','Not shown; asked once more, then the form opens','19d'],['Any payment on the spending account','Nothing. PiPlanner does not see or interrupt it','—']].map(([a,b,c])=>({a,b,c}));
+
+class Component extends DCLogic {
+  renderVals(){ return { sections: SECTIONS, edges: EDGES }; }
+}
+</script>
+</body>
+</html>

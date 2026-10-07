@@ -1,0 +1,92 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Xcode
+#
+# https://github.com/github/gitignore/blob/main/Swift.gitignore
+
+## User settings
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+
+## compatibility with Xcode 3 and earlier
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+
+## Build
+build/
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.xcarchive
+*.xcresult
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+#
+# Commit Package.resolved for apps so dependency versions stay reproducible.
+# Uncomment the lines below only to keep generated package checkouts out of git.
+.build/
+# Packages/
+# Package.pins
+# Package.resolved
+.swiftpm/
+
+# CocoaPods
+#
+# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+Pods/
+
+# Carthage
+Carthage/Build/
+# Carthage/Checkouts
+
+# Accio
+Dependencies/
+.accio/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+# Code Injection
+iOSInjectionProject/
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*~
+
+# Local secrets
+.env
+.env.*
+*.xcconfig.local
+Secrets.xcconfig
